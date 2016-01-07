@@ -2,19 +2,13 @@
 
 namespace FixedMath
 {
-#if !DOUBLE
+#if DOUBLE
+
 	public struct Fixed : IComparable, IFormattable, IConvertible, IComparable<Fixed>, IEquatable<Fixed>
 	{
-		// https://en.wikipedia.org/wiki/Q_%28number_format%29
-		private const int SHIFT_BITS = 20;
-		private const int SHIFT_NUMBER = 1048576;   // = Math.Pow(2, 20)
+		internal double RawValue;
 
-		public static readonly Fixed MAX_VALUE = new Fixed(0x7FFFFFFFFFFL);
-		public static readonly Fixed MIX_VALUE = new Fixed(-0x7FFFFFFFFFFL);
-
-		internal long RawValue;
-
-		internal Fixed(long rawValue)
+		internal Fixed(double rawValue)
 		{
 			RawValue = rawValue;
 		}
@@ -23,13 +17,12 @@ namespace FixedMath
 
 		public static Fixed FromInt(int value)
 		{
-			return new Fixed(value << SHIFT_BITS);
+			return new Fixed((double)value);
 		}
-
 
 		public static Fixed FromFloat(float value)
 		{
-			return new Fixed((long)(value * SHIFT_NUMBER));
+			return new Fixed((double)value);
 		}
 
 		#endregion
@@ -38,42 +31,18 @@ namespace FixedMath
 
 		public static Fixed Parse(string s)
 		{
-			if (string.IsNullOrEmpty(s))
-				throw new FormatException();
-
-			var parts = s.Split('.');
-			if (parts.Length == 1)
-			{
-				return FromInt(int.Parse(parts[0]));
-			}
-			else if (parts.Length == 2)
-			{
-				var integerPart = (long)int.Parse(parts[0]);
-				var fractionalPart = (long)int.Parse(parts[1]);
-
-				var denominator = 1L;
-				while (denominator < fractionalPart)
-					denominator *= 10;
-
-				integerPart = integerPart << SHIFT_BITS;
-				fractionalPart = ((fractionalPart << SHIFT_BITS) / denominator);
-
-				return new Fixed(integerPart | fractionalPart);
-			}
-			else
-			{
-				throw new FormatException();
-			}
+			return new Fixed(double.Parse(s));
 		}
 
 		public static bool TryParse(string s, out Fixed result)
 		{
-			try
+			double value;
+			if (double.TryParse(s, out value))
 			{
-				result = Parse(s);
+				result = new Fixed(value);
 				return true;
 			}
-			catch (Exception)
+			else
 			{
 				result = new Fixed();
 				return false;
@@ -125,30 +94,22 @@ namespace FixedMath
 
 		public string ToString(string format, IFormatProvider formatProvider)
 		{
-			var value = (float)RawValue / SHIFT_NUMBER;
-
-			return value.ToString(format, formatProvider);
+			return RawValue.ToString(format, formatProvider);
 		}
 
 		public string ToString(string format)
 		{
-			var value = (float)RawValue / SHIFT_NUMBER;
-
-			return value.ToString(format);
+			return RawValue.ToString(format);
 		}
 
 		public string ToString(IFormatProvider formatProvider)
 		{
-			var value = (float)RawValue / SHIFT_NUMBER;
-
-			return value.ToString(formatProvider);
+			return RawValue.ToString(formatProvider);
 		}
 
 		public override string ToString()
 		{
-			var value = (float)RawValue / SHIFT_NUMBER;
-
-			return value.ToString();
+			return RawValue.ToString();
 		}
 
 		#endregion
@@ -162,7 +123,7 @@ namespace FixedMath
 
 		bool IConvertible.ToBoolean(IFormatProvider provider)
 		{
-			return RawValue != 0;
+			return ((IConvertible)RawValue).ToBoolean(provider);
 		}
 
 		char IConvertible.ToChar(IFormatProvider provider)
@@ -172,57 +133,57 @@ namespace FixedMath
 
 		sbyte IConvertible.ToSByte(IFormatProvider provider)
 		{
-			return (sbyte)(RawValue >> SHIFT_BITS);
+			return ((IConvertible)RawValue).ToSByte(provider);
 		}
 
 		byte IConvertible.ToByte(IFormatProvider provider)
 		{
-			return (byte)(RawValue >> SHIFT_BITS);
+			return ((IConvertible)RawValue).ToByte(provider);
 		}
 
 		short IConvertible.ToInt16(IFormatProvider provider)
 		{
-			return (short)(RawValue >> SHIFT_BITS);
+			return ((IConvertible)RawValue).ToInt16(provider);
 		}
 
 		ushort IConvertible.ToUInt16(IFormatProvider provider)
 		{
-			return (ushort)(RawValue >> SHIFT_BITS);
+			return ((IConvertible)RawValue).ToUInt16(provider);
 		}
 
 		int IConvertible.ToInt32(IFormatProvider provider)
 		{
-			return (int)(RawValue >> SHIFT_BITS);
+			return ((IConvertible)RawValue).ToInt32(provider);
 		}
 
 		uint IConvertible.ToUInt32(IFormatProvider provider)
 		{
-			return (uint)(RawValue >> SHIFT_BITS);
+			return ((IConvertible)RawValue).ToUInt32(provider);
 		}
 
 		long IConvertible.ToInt64(IFormatProvider provider)
 		{
-			return (RawValue >> SHIFT_BITS);
+			return ((IConvertible)RawValue).ToInt64(provider);
 		}
 
 		ulong IConvertible.ToUInt64(IFormatProvider provider)
 		{
-			return (ulong)(RawValue >> SHIFT_BITS);
+			return ((IConvertible)RawValue).ToUInt64(provider);
 		}
 
 		float IConvertible.ToSingle(IFormatProvider provider)
 		{
-			return (float)((decimal)RawValue / SHIFT_NUMBER);
+			return (float)RawValue;
 		}
 
 		double IConvertible.ToDouble(IFormatProvider provider)
 		{
-			return (double)((decimal)RawValue / SHIFT_NUMBER);
+			return RawValue;
 		}
 
 		decimal IConvertible.ToDecimal(IFormatProvider provider)
 		{
-			return (decimal)RawValue / SHIFT_NUMBER;
+			return (decimal)RawValue;
 		}
 
 		DateTime IConvertible.ToDateTime(IFormatProvider provider)
@@ -292,12 +253,12 @@ namespace FixedMath
 
 		public static Fixed operator *(Fixed left, Fixed right)
 		{
-			return new Fixed((left.RawValue * right.RawValue) >> SHIFT_BITS);
+			return new Fixed(left.RawValue * right.RawValue);
 		}
 
 		public static Fixed operator /(Fixed left, Fixed right)
 		{
-			return new Fixed((left.RawValue << SHIFT_BITS) / right.RawValue);
+			return new Fixed(left.RawValue / right.RawValue);
 		}
 
 		public static Fixed operator -(Fixed value)
@@ -346,5 +307,6 @@ namespace FixedMath
 
 		#endregion
 	}
+
 #endif
 }
