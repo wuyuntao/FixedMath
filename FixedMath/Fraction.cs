@@ -3,124 +3,124 @@ using System.Runtime.InteropServices;
 
 namespace FixedMath
 {
-    [Serializable, StructLayout(LayoutKind.Sequential)]
-    public struct Fraction : IComparable, IComparable<Fraction>, IEquatable<Fraction>
-    {
-        private int numerator;
+	[Serializable, StructLayout(LayoutKind.Sequential)]
+	public struct Fraction : IComparable, IComparable<Fraction>, IEquatable<Fraction>
+	{
+		private int numerator;
 
-        private int denominator;
+		private int denominator;
 
-        public Fraction(int numer, int denom)
-        {
-            numerator = numer;
-            denominator = denom;
-        }
+		public Fraction(int numer, int denom)
+		{
+			numerator = numer;
+			denominator = denom;
+		}
 
-        #region IComparable
+		#region IComparable
 
-        public int CompareTo(object value)
-        {
-            if (!(value is Fraction))
-                throw new ArgumentException();
+		public int CompareTo(object value)
+		{
+			if (!(value is Fraction))
+				throw new ArgumentException();
 
-            return CompareTo((Fraction)value);
-        }
+			return CompareTo((Fraction)value);
+		}
 
-        public int CompareTo(Fraction value)
-        {
-            throw new NotImplementedException();
-        }
+		public int CompareTo(Fraction value)
+		{
+			throw new NotImplementedException();
+		}
 
-        #endregion
+		#endregion
 
-        #region IEquatable
+		#region IEquatable
 
-        public override bool Equals(object obj)
-        {
-            if (!(obj is Fraction))
-                return false;
+		public override bool Equals(object obj)
+		{
+			if (!(obj is Fraction))
+				return false;
 
-            return Equals((Fraction)obj);
-        }
+			return Equals((Fraction)obj);
+		}
 
-        public bool Equals(Fraction obj)
-        {
-            throw new NotImplementedException();
-        }
+		public bool Equals(Fraction obj)
+		{
+			throw new NotImplementedException();
+		}
 
-        public override int GetHashCode()
-        {
-            throw new NotImplementedException();
-        }
+		public override int GetHashCode()
+		{
+			throw new NotImplementedException();
+		}
 
-        #endregion
+		#endregion
 
-        #region IFormattable
+		#region IFormattable
 
-        public override string ToString()
-        {
-            return string.Format("{0}/{1}", numerator, denominator);
-        }
+		public override string ToString()
+		{
+			return string.Format("{0}/{1}", numerator, denominator);
+		}
 
-        #endregion
+		#endregion
 
 
-        #region Arithmetic Operators
+		#region Arithmetic Operators
 
-        public static Fraction operator +(Fraction left, Fraction right)
-        {
-            throw new NotImplementedException();
-        }
+		public static Fraction operator +(Fraction left, Fraction right)
+		{
+			throw new NotImplementedException();
+		}
 
-        public static Fraction operator -(Fraction left, Fraction right)
-        {
-            throw new NotImplementedException();
-        }
+		public static Fraction operator -(Fraction left, Fraction right)
+		{
+			throw new NotImplementedException();
+		}
 
-        public static Fraction operator *(Fraction left, Fraction right)
-        {
-            throw new NotImplementedException();
-        }
+		public static Fraction operator *(Fraction left, Fraction right)
+		{
+			throw new NotImplementedException();
+		}
 
-        public static Fraction operator /(Fraction left, Fraction right)
-        {
-            throw new NotImplementedException();
-        }
+		public static Fraction operator /(Fraction left, Fraction right)
+		{
+			throw new NotImplementedException();
+		}
 
-        #endregion
+		#endregion
 
-        #region Relational Operators
+		#region Relational Operators
 
-        public static bool operator ==(Fraction left, Fraction right)
-        {
-            throw new NotImplementedException();
-        }
+		public static bool operator ==(Fraction left, Fraction right)
+		{
+			throw new NotImplementedException();
+		}
 
-        public static bool operator !=(Fraction left, Fraction right)
-        {
-            throw new NotImplementedException();
-        }
+		public static bool operator !=(Fraction left, Fraction right)
+		{
+			throw new NotImplementedException();
+		}
 
-        public static bool operator <(Fraction left, Fraction right)
-        {
-            throw new NotImplementedException();
-        }
+		public static bool operator <(Fraction left, Fraction right)
+		{
+			throw new NotImplementedException();
+		}
 
-        public static bool operator >(Fraction left, Fraction right)
-        {
-            throw new NotImplementedException();
-        }
+		public static bool operator >(Fraction left, Fraction right)
+		{
+			throw new NotImplementedException();
+		}
 
-        public static bool operator <=(Fraction left, Fraction right)
-        {
-            throw new NotImplementedException();
-        }
+		public static bool operator <=(Fraction left, Fraction right)
+		{
+			throw new NotImplementedException();
+		}
 
-        public static bool operator >=(Fraction left, Fraction right)
-        {
-            throw new NotImplementedException();
-        }
+		public static bool operator >=(Fraction left, Fraction right)
+		{
+			throw new NotImplementedException();
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

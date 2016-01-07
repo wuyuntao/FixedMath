@@ -2,7 +2,7 @@
 
 namespace FixedMath
 {
-#if DOUBLE
+#if !FIXEDPOINT
 
 	public struct Fixed : IComparable, IFormattable, IConvertible, IComparable<Fixed>, IEquatable<Fixed>
 	{
@@ -23,6 +23,11 @@ namespace FixedMath
 		public static Fixed FromFloat(float value)
 		{
 			return new Fixed((double)value);
+		}
+
+		public static Fixed FromFraction(int numerator, int denominator)
+		{
+			return Fixed.FromInt(numerator) / Fixed.FromInt(denominator);
 		}
 
 		#endregion
@@ -303,6 +308,16 @@ namespace FixedMath
 		public static bool operator >=(Fixed left, Fixed right)
 		{
 			return left.RawValue >= right.RawValue;
+		}
+
+		#endregion
+
+
+		#region Approximate Comparison
+
+		public static bool Approximately(Fixed left, Fixed right)
+		{
+			return (FMath.Abs(left - right)) < FromFraction(1, 100000) * FMath.Max(FMath.Abs(left), FMath.Abs(right));
 		}
 
 		#endregion

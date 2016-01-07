@@ -2,7 +2,7 @@
 
 namespace FixedMath
 {
-#if !DOUBLE
+#if FIXEDPOINT
 	public struct Fixed : IComparable, IFormattable, IConvertible, IComparable<Fixed>, IEquatable<Fixed>
 	{
 		// https://en.wikipedia.org/wiki/Q_%28number_format%29
@@ -32,6 +32,11 @@ namespace FixedMath
 			return new Fixed((long)(value * SHIFT_NUMBER));
 		}
 
+		public static Fixed FromFraction(int numerator, int denominator)
+		{
+			return Fixed.FromInt(numerator) / Fixed.FromInt(denominator);
+		}
+
 		#endregion
 
 		#region Parse Methods
@@ -52,7 +57,7 @@ namespace FixedMath
 				var fractionalPart = (long)int.Parse(parts[1]);
 
 				var denominator = 1L;
-				while (denominator < fractionalPart)
+				while (denominator <= fractionalPart)
 					denominator *= 10;
 
 				integerPart = integerPart << SHIFT_BITS;
@@ -314,6 +319,11 @@ namespace FixedMath
 
 		#region Relational Operators
 
+		public static bool Equal(Fixed left, Fixed right)
+		{
+			return left.RawValue == right.RawValue;
+		}
+
 		public static bool operator ==(Fixed left, Fixed right)
 		{
 			return left.RawValue == right.RawValue;
@@ -342,6 +352,15 @@ namespace FixedMath
 		public static bool operator >=(Fixed left, Fixed right)
 		{
 			return left.RawValue >= right.RawValue;
+		}
+
+		#endregion
+
+		#region Approximate Comparison
+
+		public static bool Approximately(Fixed left, Fixed right)
+		{
+			return (FMath.Abs(left - right)) < FromFraction(1, 100000) * FMath.Max(FMath.Abs(left), FMath.Abs(right));
 		}
 
 		#endregion
