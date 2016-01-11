@@ -59,7 +59,19 @@ namespace FixedMath.Tests
 			AssertApproximately(r, div);
 		}
 
-		static void AssertApproximately(Fixed expected, Fixed actual)
+        [Test]
+        public void TestSqrt()
+        {
+            var a = Fixed.FromInt(9);
+            var r = Fixed.FromInt(3);
+            AssertApproximately(r, FMath.Sqrt(a));
+
+            a = Fixed.Parse("1546.564654");
+            r = Fixed.Parse("39.326386");
+            AssertApproximately(r, FMath.Sqrt(a));
+        }
+
+        static void AssertApproximately(Fixed expected, Fixed actual)
 		{
 			Assert.True(Fixed.Approximately(expected, actual));
 		}

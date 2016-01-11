@@ -92,7 +92,27 @@ namespace FixedMath
 #if !FIXEDPOINT
 			return new Fixed(Math.Sqrt(value.RawValue));
 #else
-			throw new NotImplementedException();
+            // https://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Binary_numeral_system_.28base_2.29
+            var v = value.RawValue << Fixed.SHIFT_BITS;
+            var r = 0L;
+            var bit = 1L << 62;
+
+            while (bit > v)
+                bit >>= 2;
+
+            while (bit != 0)
+            {
+                if (v >= r + bit)
+                {
+                    v -= r + bit;
+                    r = (r >> 1) + bit;
+                }
+                else
+                    r >>= 1;
+                bit >>= 2;
+            }
+
+            return new Fixed(r);
 #endif
 		}
 	}

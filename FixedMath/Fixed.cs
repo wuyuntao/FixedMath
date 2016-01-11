@@ -6,8 +6,8 @@ namespace FixedMath
 	public struct Fixed : IComparable, IFormattable, IConvertible, IComparable<Fixed>, IEquatable<Fixed>
 	{
 		// https://en.wikipedia.org/wiki/Q_%28number_format%29
-		private const int SHIFT_BITS = 20;
-		private const int SHIFT_NUMBER = 1048576;   // = Math.Pow(2, 20)
+        internal const int SHIFT_BITS = 20;
+        internal const int SHIFT_NUMBER = 1048576;   // = Math.Pow(2, 20)
 
 		public static readonly Fixed MaxValue = new Fixed(0x7FFFFFFFFFFL);
 		public static readonly Fixed MinValue = new Fixed(-0x7FFFFFFFFFFL);

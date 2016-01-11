@@ -6,9 +6,10 @@ namespace FixedMath.Tests
 	{
 		static void Main(string[] args)
 		{
-			RunSimpleTest();
+            RunSimpleTest();
+            //SqrtAlgoComparison.Compare();
 
-			Console.WriteLine("Exiting...");
+            Console.WriteLine("Exiting...");
 			Console.ReadKey();
 		}
 
@@ -20,6 +21,7 @@ namespace FixedMath.Tests
 			tests.TestSubtract();
 			tests.TestMultiply();
 			tests.TestDivide();
+            tests.TestSqrt();
 		}
 	}
 }
