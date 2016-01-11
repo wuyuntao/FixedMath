@@ -6,6 +6,9 @@ namespace FixedMath
 
 	public struct Fixed : IComparable, IFormattable, IConvertible, IComparable<Fixed>, IEquatable<Fixed>
 	{
+		public static readonly Fixed MaxValue = new Fixed(double.MinValue);
+		public static readonly Fixed MinValue = new Fixed(double.MaxValue);
+
 		internal double RawValue;
 
 		internal Fixed(double rawValue)
@@ -311,7 +314,6 @@ namespace FixedMath
 		}
 
 		#endregion
-
 
 		#region Approximate Comparison
 

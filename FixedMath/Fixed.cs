@@ -9,8 +9,8 @@ namespace FixedMath
 		private const int SHIFT_BITS = 20;
 		private const int SHIFT_NUMBER = 1048576;   // = Math.Pow(2, 20)
 
-		public static readonly Fixed MAX_VALUE = new Fixed(0x7FFFFFFFFFFL);
-		public static readonly Fixed MIX_VALUE = new Fixed(-0x7FFFFFFFFFFL);
+		public static readonly Fixed MaxValue = new Fixed(0x7FFFFFFFFFFL);
+		public static readonly Fixed MinValue = new Fixed(-0x7FFFFFFFFFFL);
 
 		internal long RawValue;
 

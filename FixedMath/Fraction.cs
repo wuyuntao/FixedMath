@@ -64,7 +64,6 @@ namespace FixedMath
 
 		#endregion
 
-
 		#region Arithmetic Operators
 
 		public static Fraction operator +(Fraction left, Fraction right)
