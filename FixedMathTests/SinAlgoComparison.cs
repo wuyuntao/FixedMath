@@ -34,7 +34,6 @@ namespace FixedMath.Tests
             Console.WriteLine("Loop: {0}, Time: {1:f6}ms, Error: {2:f6}", loop, timer.ElapsedMilliseconds, error / loop);
         }
 
-
         static Fixed Sin0(Fixed angle)
         {
             return Fixed.FromFloat((float)Math.Sin(angle.ToFloat()));

@@ -10,7 +10,7 @@ namespace FixedMath
 
         public static Fixed Abs(Fixed value)
         {
-            return value < Fixed.FromInt(0) ? -value : value;
+            return value < Fixed.Zero ? -value : value;
         }
 
         public static Fixed Max(Fixed val1, Fixed val2)
@@ -103,7 +103,43 @@ namespace FixedMath
 #if !FIXEDPOINT
 			return new Fixed(Math.Atan(d.RawValue));
 #else
-            return Atan2(d, Fixed.FromInt(1));
+            // https://en.wikipedia.org/wiki/Inverse_trigonometric_functions
+            // Make sure |d| <= 1
+            bool inversed;
+            if (Abs(d) > Fixed.One)
+            {
+                d = Fixed.One / d;
+                inversed = true;
+            }
+            else
+                inversed = false;
+
+            var v = d.RawValue;
+            var square = (v * v) >> Fixed.SHIFT_BITS;
+
+            var r = v;
+            var n = 3L;
+
+            for (int i = 0; i < 15; i++)
+            {
+                v = (v * square) >> Fixed.SHIFT_BITS;
+                r -= v / n;
+                n += 2;
+
+                v = (v * square) >> Fixed.SHIFT_BITS;
+                r += v / n;
+                n += 2;
+            }
+
+            if (inversed)
+            {
+                if (r > 0)
+                    r = (PI.RawValue >> 1) - r;
+                else
+                    r = -(PI.RawValue >> 1) - r;
+            }
+
+            return new Fixed(r);
 #endif
         }
 
@@ -112,7 +148,27 @@ namespace FixedMath
 #if !FIXEDPOINT
 			return new Fixed(Math.Atan2(y.RawValue, x.RawValue));
 #else
-            throw new NotImplementedException();
+            // https://en.wikipedia.org/wiki/Atan2#Definition_and_computation
+            if (x > Fixed.Zero)
+            {
+                return Atan(y / x);
+            }
+            else if (x < Fixed.Zero)
+            {
+                if (y >= Fixed.Zero)
+                    return Atan(y / x) + PI;
+                else
+                    return Atan(y / x) - PI;
+            }
+            else
+            {
+                if (y > Fixed.Zero)
+                    return new Fixed(PI.RawValue >> 1);
+                else if (y < Fixed.Zero)
+                    return new Fixed(-PI.RawValue >> 1);
+                else
+                    throw new NotSupportedException();
+            }
 #endif
         }
 

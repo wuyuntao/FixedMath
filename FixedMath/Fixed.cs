@@ -13,6 +13,9 @@ namespace FixedMath
         public static readonly Fixed MaxValue = new Fixed(0x7FFFFFFFFFFL);
         public static readonly Fixed MinValue = new Fixed(-0x7FFFFFFFFFFL);
 
+        public static readonly Fixed Zero = new Fixed(0);
+        public static readonly Fixed One = FromInt(1);
+
         internal long RawValue;
 
         internal Fixed(long rawValue)

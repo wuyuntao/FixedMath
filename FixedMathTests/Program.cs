@@ -6,9 +6,10 @@ namespace FixedMath.Tests
 	{
 		static void Main(string[] args)
 		{
-            RunSimpleTest();
+            //RunSimpleTest();
             //SqrtAlgoComparison.Compare();
             //SinAlgoComparison.Compare();
+            AtanAlgoComparison.Compare();
 
             Console.WriteLine("Exiting...");
 			Console.ReadKey();
