@@ -2,93 +2,124 @@
 
 namespace FixedMath
 {
-	public static class FMath
-	{
-		public static readonly Fixed E = Fixed.FromFraction(2718281, 1000000);
+    public static class FMath
+    {
+        public static readonly Fixed E = Fixed.FromFraction(2718281, 1000000);
 
-		public static readonly Fixed PI = Fixed.FromFraction(3141592, 1000000);
+        public static readonly Fixed PI = Fixed.FromFraction(3141592, 1000000);
 
-		public static Fixed Abs(Fixed value)
-		{
-			return value < Fixed.FromInt(0) ? -value : value;
-		}
+        public static Fixed Abs(Fixed value)
+        {
+            return value < Fixed.FromInt(0) ? -value : value;
+        }
 
-		public static Fixed Max(Fixed val1, Fixed val2)
-		{
-			return val1 >= val2 ? val1 : val2;
-		}
+        public static Fixed Max(Fixed val1, Fixed val2)
+        {
+            return val1 >= val2 ? val1 : val2;
+        }
 
-		public static Fixed Min(Fixed val1, Fixed val2)
-		{
-			return val1 <= val2 ? val1 : val2;
-		}
+        public static Fixed Min(Fixed val1, Fixed val2)
+        {
+            return val1 <= val2 ? val1 : val2;
+        }
 
-		public static Fixed Sin(Fixed angle)
-		{
+        #region Trigonometric Functions
+
+        public static Fixed Sin(Fixed angle)
+        {
 #if !FIXEDPOINT
 			return new Fixed(Math.Sin(angle.RawValue));
 #else
-			throw new NotImplementedException();
-#endif
-		}
+            // https://en.wikipedia.org/wiki/Trigonometric_functions#Series_definitions
+            var pi = PI.RawValue;
+            var pi2 = pi << 1;
 
-		public static Fixed Asin(Fixed angle)
-		{
+            // Normalize rad to [-π, +π]
+            var rad = angle.RawValue % pi2;
+            if (rad > pi)
+                rad -= pi2;
+            else if (rad < -pi)
+                rad += pi2;
+
+            var square = (rad * rad) >> Fixed.SHIFT_BITS;
+
+            var r = rad;                // x
+            rad = (rad * square) >> Fixed.SHIFT_BITS;
+            r -= rad / 6L;              // - x^3 / 3!
+            rad = (rad * square) >> Fixed.SHIFT_BITS;
+            r += rad / 120L;            // + x^5 / 5!
+            rad = (rad * square) >> Fixed.SHIFT_BITS;
+            r -= rad / 5040L;           // - x^7 / 7!
+            rad = (rad * square) >> Fixed.SHIFT_BITS;
+            r += rad / 362880L;         // + x^9 / 9!
+            rad = (rad * square) >> Fixed.SHIFT_BITS;
+            r -= rad / 39916800L;       // - x^11 / 11!
+            rad = (rad * square) >> Fixed.SHIFT_BITS;
+            r += rad / 6227020800L;     // + x^13 / 13!
+
+            return new Fixed(r);
+#endif
+        }
+
+        public static Fixed Asin(Fixed d)
+        {
 #if !FIXEDPOINT
-			return new Fixed(Math.Asin(angle.RawValue));
+			return new Fixed(Math.Asin(d.RawValue));
 #else
-			throw new NotImplementedException();
+            throw new NotImplementedException();
 #endif
-		}
+        }
 
 
-		public static Fixed Cos(Fixed angle)
-		{
+        public static Fixed Cos(Fixed angle)
+        {
 #if !FIXEDPOINT
 			return new Fixed(Math.Cos(angle.RawValue));
 #else
-			throw new NotImplementedException();
+            return Sin(PI / Fixed.FromInt(2) - angle);
 #endif
-		}
+        }
 
-		public static Fixed Acos(Fixed angle)
-		{
+        public static Fixed Acos(Fixed d)
+        {
 #if !FIXEDPOINT
-			return new Fixed(Math.Acos(angle.RawValue));
+			return new Fixed(Math.Acos(d.RawValue));
 #else
-			throw new NotImplementedException();
+            throw new NotImplementedException();
 #endif
-		}
+        }
 
-		public static Fixed Tan(Fixed angle)
-		{
+        public static Fixed Tan(Fixed angle)
+        {
 #if !FIXEDPOINT
 			return new Fixed(Math.Tan(angle.RawValue));
 #else
-			throw new NotImplementedException();
+            return Sin(angle) / Cos(angle);
 #endif
-		}
+        }
 
-		public static Fixed Atan(Fixed angle)
-		{
+        public static Fixed Atan(Fixed d)
+        {
 #if !FIXEDPOINT
-			return new Fixed(Math.Atan(angle.RawValue));
+			return new Fixed(Math.Atan(d.RawValue));
 #else
-			throw new NotImplementedException();
+            return Atan2(d, Fixed.FromInt(1));
 #endif
-		}
+        }
 
-		public static Fixed Atan2(Fixed y, Fixed x)
-		{
+        public static Fixed Atan2(Fixed y, Fixed x)
+        {
 #if !FIXEDPOINT
 			return new Fixed(Math.Atan2(y.RawValue, x.RawValue));
 #else
-			throw new NotImplementedException();
+            throw new NotImplementedException();
 #endif
-		}
+        }
 
-		public static Fixed Sqrt(Fixed value)
-		{
+        #endregion
+
+        public static Fixed Sqrt(Fixed value)
+        {
 #if !FIXEDPOINT
 			return new Fixed(Math.Sqrt(value.RawValue));
 #else
@@ -114,6 +145,6 @@ namespace FixedMath
 
             return new Fixed(r);
 #endif
-		}
-	}
+        }
+    }
 }

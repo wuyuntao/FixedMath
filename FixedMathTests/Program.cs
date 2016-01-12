@@ -8,6 +8,7 @@ namespace FixedMath.Tests
 		{
             RunSimpleTest();
             //SqrtAlgoComparison.Compare();
+            //SinAlgoComparison.Compare();
 
             Console.WriteLine("Exiting...");
 			Console.ReadKey();
@@ -22,6 +23,9 @@ namespace FixedMath.Tests
 			tests.TestMultiply();
 			tests.TestDivide();
             tests.TestSqrt();
-		}
+            tests.TestSin();
+            tests.TestCos();
+            tests.TestTan();
+        }
 	}
 }

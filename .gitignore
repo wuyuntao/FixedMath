@@ -196,3 +196,4 @@ FakesAssemblies/
 *.opt
 
 [Tt]emp/
+*.opendb

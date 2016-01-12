@@ -14,7 +14,7 @@ namespace FixedMath.Tests
             Test(seed, Sqrt2);
         }
 
-        public static void Test(int seed, Func<long, long> sqrt, int loop = 1000000)
+        static void Test(int seed, Func<long, long> sqrt, int loop = 1000000)
         {
             var r = new Random(seed);
             var timer = new Stopwatch();
