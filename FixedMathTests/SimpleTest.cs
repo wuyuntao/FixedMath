@@ -22,6 +22,46 @@ namespace FixedMath.Tests
         }
 
         [Test]
+        public void TestParseInt()
+        {
+            // Test Int
+            var n = Fixed.Parse("0");
+            Assert.AreEqual(Fixed.Zero, n);
+
+            n = Fixed.Parse("1");
+            Assert.AreEqual(Fixed.One, n);
+
+            n = Fixed.Parse("-1");
+            Assert.AreEqual(Fixed.FromInt(-1), n);
+
+            n = Fixed.Parse("16777216");
+            Assert.AreEqual(Fixed.FromInt(16777216), n);
+
+            n = Fixed.Parse("-16777216");
+            Assert.AreEqual(Fixed.FromInt(-16777216), n);
+        }
+
+        [Test]
+        public void TestParseFloat()
+        {
+            // Test Int
+            var f = Fixed.Parse("000.0000");
+            AssertApproximately(Fixed.Zero, f);
+
+            f = Fixed.Parse("1.4567");
+            AssertApproximately(Fixed.FromFloat(1.4567f), f);
+
+            f = Fixed.Parse("-1.4831");
+            AssertApproximately(Fixed.FromFloat(-1.4831f), f);
+
+            f = Fixed.Parse("16777216.1345654");
+            AssertApproximately(Fixed.FromFloat(16777216), f);
+
+            f = Fixed.Parse("-16777216.1345654");
+            AssertApproximately(Fixed.FromFloat(-16777216), f);
+        }
+
+        [Test]
         public void TestAdd()
         {
             var a = Fixed.Parse("10.3");
@@ -29,6 +69,12 @@ namespace FixedMath.Tests
 
             var sum = a + b;
             AssertApproximately(Fixed.Parse("13.5"), sum);
+
+            sum = a + 3;
+            AssertApproximately(Fixed.Parse("13.3"), sum);
+
+            sum = -5 + b;
+            AssertApproximately(Fixed.Parse("-1.8"), sum);
         }
 
         [Test]

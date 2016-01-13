@@ -9,6 +9,9 @@ namespace FixedMath
         public static readonly Fixed MaxValue = new Fixed(double.MinValue);
         public static readonly Fixed MinValue = new Fixed(double.MaxValue);
 
+        public static readonly Fixed Zero = new Fixed(0);
+        public static readonly Fixed One = new Fixed(1);
+
         internal double RawValue;
 
         internal Fixed(double rawValue)
@@ -20,17 +23,17 @@ namespace FixedMath
 
         public static Fixed FromInt(int value)
         {
-            return new Fixed((double)value);
+            return new Fixed(value);
         }
 
         public static Fixed FromFloat(float value)
         {
-            return new Fixed((double)value);
+            return new Fixed(value);
         }
 
         public static Fixed FromFraction(int numerator, int denominator)
         {
-            return Fixed.FromInt(numerator) / Fixed.FromInt(denominator);
+            return FromInt(numerator) / FromInt(denominator);
         }
 
         #endregion
@@ -264,9 +267,29 @@ namespace FixedMath
             return new Fixed(left.RawValue + right.RawValue);
         }
 
+        public static Fixed operator +(Fixed left, int right)
+        {
+            return new Fixed(left.RawValue + right);
+        }
+
+        public static Fixed operator +(int left, Fixed right)
+        {
+            return new Fixed(left + right.RawValue);
+        }
+
         public static Fixed operator -(Fixed left, Fixed right)
         {
             return new Fixed(left.RawValue - right.RawValue);
+        }
+
+        public static Fixed operator -(Fixed left, int right)
+        {
+            return new Fixed(left.RawValue - right);
+        }
+
+        public static Fixed operator -(int left, Fixed right)
+        {
+            return new Fixed(left - right.RawValue);
         }
 
         public static Fixed operator *(Fixed left, Fixed right)
@@ -274,9 +297,29 @@ namespace FixedMath
             return new Fixed(left.RawValue * right.RawValue);
         }
 
+        public static Fixed operator *(Fixed left, int right)
+        {
+            return new Fixed(left.RawValue * right);
+        }
+
+        public static Fixed operator *(int left, Fixed right)
+        {
+            return new Fixed(left * right.RawValue);
+        }
+
         public static Fixed operator /(Fixed left, Fixed right)
         {
             return new Fixed(left.RawValue / right.RawValue);
+        }
+
+        public static Fixed operator /(Fixed left, int right)
+        {
+            return new Fixed(left.RawValue / right);
+        }
+
+        public static Fixed operator /(int left, Fixed right)
+        {
+            return new Fixed(left / right.RawValue);
         }
 
         public static Fixed operator -(Fixed value)
@@ -298,9 +341,29 @@ namespace FixedMath
             return left.RawValue == right.RawValue;
         }
 
+        public static bool operator ==(Fixed left, int right)
+        {
+            return left.RawValue == right;
+        }
+
+        public static bool operator ==(int left, Fixed right)
+        {
+            return left == right.RawValue;
+        }
+
         public static bool operator !=(Fixed left, Fixed right)
         {
             return left.RawValue != right.RawValue;
+        }
+
+        public static bool operator !=(Fixed left, int right)
+        {
+            return left.RawValue != right;
+        }
+
+        public static bool operator !=(int left, Fixed right)
+        {
+            return left != right.RawValue;
         }
 
         public static bool operator <(Fixed left, Fixed right)
@@ -308,9 +371,29 @@ namespace FixedMath
             return left.RawValue < right.RawValue;
         }
 
+        public static bool operator <(Fixed left, int right)
+        {
+            return left.RawValue < right;
+        }
+
+        public static bool operator <(int left, Fixed right)
+        {
+            return left < right.RawValue;
+        }
+
         public static bool operator >(Fixed left, Fixed right)
         {
             return left.RawValue > right.RawValue;
+        }
+
+        public static bool operator >(Fixed left, int right)
+        {
+            return left.RawValue > right;
+        }
+
+        public static bool operator >(int left, Fixed right)
+        {
+            return left > right.RawValue;
         }
 
         public static bool operator <=(Fixed left, Fixed right)
@@ -318,9 +401,29 @@ namespace FixedMath
             return left.RawValue <= right.RawValue;
         }
 
+        public static bool operator <=(Fixed left, int right)
+        {
+            return left.RawValue <= right;
+        }
+
+        public static bool operator <=(int left, Fixed right)
+        {
+            return left <= right.RawValue;
+        }
+
         public static bool operator >=(Fixed left, Fixed right)
         {
             return left.RawValue >= right.RawValue;
+        }
+
+        public static bool operator >=(Fixed left, int right)
+        {
+            return left.RawValue >= right;
+        }
+
+        public static bool operator >=(int left, Fixed right)
+        {
+            return left >= right.RawValue;
         }
 
         #endregion

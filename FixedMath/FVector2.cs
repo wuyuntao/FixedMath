@@ -101,12 +101,12 @@ namespace FixedMath
 			return value;
 		}
 
-		public Fixed Distance(FVector2 value1, FVector2 value2)
+		public static Fixed Distance(FVector2 value1, FVector2 value2)
 		{
 			return (value1 - value2).Length();
 		}
 
-		public Fixed DistanceSquared(FVector2 value1, FVector2 value2)
+		public static Fixed DistanceSquared(FVector2 value1, FVector2 value2)
 		{
 			return (value1 - value2).LengthSquared();
 		}
