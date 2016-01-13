@@ -126,6 +126,70 @@ namespace FixedMath.Tests
             AssertApproximately(r, FMath.Tan(a));
         }
 
+        [Test]
+        public void TestAtan()
+        {
+            var a = Fixed.FromInt(14);
+            var r = Fixed.FromFloat(1.4994888f);
+            AssertApproximately(r, FMath.Atan(a));
+
+            a = Fixed.FromFloat(-0.154787f);
+            r = Fixed.FromFloat(-0.153568f);
+            AssertApproximately(r, FMath.Atan(a));
+
+            a = Fixed.FromFloat(0.7547870f);
+            r = Fixed.FromFloat(0.6465577f);
+            AssertApproximately(r, FMath.Atan(a));
+        }
+
+        [Test]
+        public void TestAtan2()
+        {
+            var y = Fixed.FromInt(0);
+            var x = Fixed.FromInt(1);
+            var r = Fixed.FromFloat(0);
+            AssertApproximately(r, FMath.Atan2(y, x));
+
+            y = Fixed.FromInt(0);
+            x = Fixed.FromInt(-1);
+            r = Fixed.FromFloat((float)Math.PI);
+            AssertApproximately(r, FMath.Atan2(y, x));
+
+            y = Fixed.FromInt(1);
+            x = Fixed.FromInt(0);
+            r = Fixed.FromFloat((float)Math.PI / 2);
+            AssertApproximately(r, FMath.Atan2(y, x));
+
+            y = Fixed.FromFloat(1.54513f);
+            x = Fixed.FromFloat(-1.65673f);
+            r = Fixed.FromFloat(2.390926f);     // 2.3910351266f is more accurate value
+            AssertApproximately(r, FMath.Atan2(y, x));
+        }
+
+        [Test]
+        public void TestAsin()
+        {
+            var a = Fixed.FromFloat(0.54646f);
+            var r = Fixed.FromFloat(0.578131f);
+            AssertApproximately(r, FMath.Asin(a));
+
+            a = Fixed.FromFloat(-0.154787f);
+            r = Fixed.FromFloat(-0.155411851f);
+            AssertApproximately(r, FMath.Asin(a));
+        }
+
+        [Test]
+        public void TestAcos()
+        {
+            var a = Fixed.FromFloat(0.54646f);
+            var r = Fixed.FromFloat(0.992664887f);
+            AssertApproximately(r, FMath.Acos(a));
+
+            a = Fixed.FromFloat(-0.154787f);
+            r = Fixed.FromFloat(1.726208178f);
+            AssertApproximately(r, FMath.Acos(a));
+        }
+
         static void AssertApproximately(Fixed expected, Fixed actual)
         {
             Assert.True(Fixed.Approximately(expected, actual));

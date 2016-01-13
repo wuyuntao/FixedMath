@@ -66,7 +66,10 @@ namespace FixedMath
 #if !FIXEDPOINT
 			return new Fixed(Math.Asin(d.RawValue));
 #else
-            throw new NotImplementedException();
+            if (d > Fixed.One || d < -Fixed.One)
+                throw new NotSupportedException();
+
+            return Atan(d / Sqrt(Fixed.One - d * d));
 #endif
         }
 
@@ -76,7 +79,7 @@ namespace FixedMath
 #if !FIXEDPOINT
 			return new Fixed(Math.Cos(angle.RawValue));
 #else
-            return Sin(PI / Fixed.FromInt(2) - angle);
+            return Sin(new Fixed(PI.RawValue >> 1) - angle);
 #endif
         }
 
@@ -85,7 +88,7 @@ namespace FixedMath
 #if !FIXEDPOINT
 			return new Fixed(Math.Acos(d.RawValue));
 #else
-            throw new NotImplementedException();
+            return new Fixed(PI.RawValue >> 1) - Asin(d);
 #endif
         }
 

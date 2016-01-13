@@ -6,10 +6,10 @@ namespace FixedMath.Tests
 	{
 		static void Main(string[] args)
 		{
-            //RunSimpleTest();
+            RunSimpleTest();
             //SqrtAlgoComparison.Compare();
             //SinAlgoComparison.Compare();
-            AtanAlgoComparison.Compare();
+            //AtanAlgoComparison.Compare();
 
             Console.WriteLine("Exiting...");
 			Console.ReadKey();
@@ -27,6 +27,10 @@ namespace FixedMath.Tests
             tests.TestSin();
             tests.TestCos();
             tests.TestTan();
+            tests.TestAtan();
+            tests.TestAtan2();
+            tests.TestAsin();
+            tests.TestAcos();
         }
 	}
 }
