@@ -3,7 +3,7 @@ using System;
 
 namespace FixedMath.Tests
 {
-    public class SimpleTest
+    public class FixedTest
     {
         [Test]
         public void TestFactory()

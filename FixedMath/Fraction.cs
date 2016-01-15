@@ -371,9 +371,29 @@ namespace FixedMath
             }
         }
 
+        public static Fraction operator +(int left, Fraction right)
+        {
+            return new Fraction(left) + right;
+        }
+
+        public static Fraction operator +(Fraction left, int right)
+        {
+            return left + new Fraction(right);
+        }
+
         public static Fraction operator -(Fraction left, Fraction right)
         {
             return left + (-right);
+        }
+
+        public static Fraction operator -(int left, Fraction right)
+        {
+            return new Fraction(left) - right;
+        }
+
+        public static Fraction operator -(Fraction left, int right)
+        {
+            return left - new Fraction(right);
         }
 
         public static Fraction operator *(Fraction left, Fraction right)
@@ -394,11 +414,31 @@ namespace FixedMath
             }
         }
 
+        public static Fraction operator *(int left, Fraction right)
+        {
+            return new Fraction(left) * right;
+        }
+
+        public static Fraction operator *(Fraction left, int right)
+        {
+            return left * new Fraction(right);
+        }
+
         public static Fraction operator /(Fraction left, Fraction right)
         {
             right.Inverse();
 
             return left * right;
+        }
+
+        public static Fraction operator /(int left, Fraction right)
+        {
+            return new Fraction(left) / right;
+        }
+
+        public static Fraction operator /(Fraction left, int right)
+        {
+            return left / new Fraction(right);
         }
 
         public static Fraction operator +(Fraction value)
@@ -420,9 +460,29 @@ namespace FixedMath
             return left.CompareTo(right) == 0;
         }
 
+        public static bool operator ==(int left, Fraction right)
+        {
+            return new Fraction(left) == right;
+        }
+
+        public static bool operator ==(Fraction left, int right)
+        {
+            return left == new Fraction(right);
+        }
+
         public static bool operator !=(Fraction left, Fraction right)
         {
             return left.CompareTo(right) != 0;
+        }
+
+        public static bool operator !=(int left, Fraction right)
+        {
+            return new Fraction(left) != right;
+        }
+
+        public static bool operator !=(Fraction left, int right)
+        {
+            return left != new Fraction(right);
         }
 
         public static bool operator <(Fraction left, Fraction right)
@@ -430,9 +490,29 @@ namespace FixedMath
             return left.CompareTo(right) < 0;
         }
 
+        public static bool operator <(int left, Fraction right)
+        {
+            return new Fraction(left) < right;
+        }
+
+        public static bool operator <(Fraction left, int right)
+        {
+            return left < new Fraction(right);
+        }
+
         public static bool operator >(Fraction left, Fraction right)
         {
             return left.CompareTo(right) > 0;
+        }
+
+        public static bool operator >(int left, Fraction right)
+        {
+            return new Fraction(left) > right;
+        }
+
+        public static bool operator >(Fraction left, int right)
+        {
+            return left > new Fraction(right);
         }
 
         public static bool operator <=(Fraction left, Fraction right)
@@ -440,9 +520,29 @@ namespace FixedMath
             return left.CompareTo(right) <= 0;
         }
 
+        public static bool operator <=(int left, Fraction right)
+        {
+            return new Fraction(left) <= right;
+        }
+
+        public static bool operator <=(Fraction left, int right)
+        {
+            return left <= new Fraction(right);
+        }
+
         public static bool operator >=(Fraction left, Fraction right)
         {
             return left.CompareTo(right) >= 0;
+        }
+
+        public static bool operator >=(int left, Fraction right)
+        {
+            return new Fraction(left) >= right;
+        }
+
+        public static bool operator >=(Fraction left, int right)
+        {
+            return left >= new Fraction(right);
         }
 
         #endregion
