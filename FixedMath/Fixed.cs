@@ -9,7 +9,7 @@ namespace FixedMath
         internal const int SHIFT_BITS = 20;
         internal const int SHIFT_NUMBER = 1048576;   // = Math.Pow(2, 20)
 
-        private static readonly Fixed Epsilon = new Fixed(1L);
+        public static readonly Fixed Epsilon = new Fixed(1L);
         public static readonly Fixed MaxValue = new Fixed(0x7FFFFFFFFFFL);
         public static readonly Fixed MinValue = new Fixed(-0x7FFFFFFFFFFL);
 
@@ -52,7 +52,7 @@ namespace FixedMath
         public static Fixed Parse(string s)
         {
             if (string.IsNullOrEmpty(s))
-                throw new FormatException();
+                throw new FormatException("Invalid format");
 
             var parts = s.Split('.');
             if (parts.Length == 1)
@@ -78,7 +78,7 @@ namespace FixedMath
             }
             else
             {
-                throw new FormatException();
+                throw new FormatException("Invalid format");
             }
         }
 
@@ -366,14 +366,14 @@ namespace FixedMath
             return new Fixed((GetRawValueFromInt(left) << SHIFT_BITS) / right.RawValue);
         }
 
-        public static Fixed operator -(Fixed value)
-        {
-            return new Fixed(-value.RawValue);
-        }
-
         public static Fixed operator +(Fixed value)
         {
             return new Fixed(value.RawValue);
+        }
+
+        public static Fixed operator -(Fixed value)
+        {
+            return new Fixed(-value.RawValue);
         }
 
         #endregion

@@ -9,6 +9,7 @@ namespace FixedMath
         public static readonly Fixed MaxValue = new Fixed(double.MinValue);
         public static readonly Fixed MinValue = new Fixed(double.MaxValue);
 
+		public static readonly Fixed Epsilon = new Fixed(double.Epsilon);
         public static readonly Fixed Zero = new Fixed(0);
         public static readonly Fixed One = new Fixed(1);
 
@@ -19,7 +20,7 @@ namespace FixedMath
             RawValue = rawValue;
         }
 
-        #region Factory Methods
+    #region Factory Methods
 
         public static Fixed FromInt(int value)
         {
@@ -36,9 +37,9 @@ namespace FixedMath
             return FromInt(numerator) / FromInt(denominator);
         }
 
-        #endregion
+    #endregion
 
-        #region Parse Methods
+    #region Parse Methods
 
         public static Fixed Parse(string s)
         {
@@ -60,9 +61,9 @@ namespace FixedMath
             }
         }
 
-        #endregion
+    #endregion
 
-        #region IComparable
+    #region IComparable
 
         public int CompareTo(object value)
         {
@@ -77,9 +78,9 @@ namespace FixedMath
             return RawValue.CompareTo(value.RawValue);
         }
 
-        #endregion
+    #endregion
 
-        #region IEquatable
+    #region IEquatable
 
         public override bool Equals(object obj)
         {
@@ -99,9 +100,9 @@ namespace FixedMath
             return RawValue.GetHashCode();
         }
 
-        #endregion
+    #endregion
 
-        #region IFormattable
+    #region IFormattable
 
         public string ToString(string format, IFormatProvider formatProvider)
         {
@@ -123,9 +124,9 @@ namespace FixedMath
             return RawValue.ToString();
         }
 
-        #endregion
+    #endregion
 
-        #region IConvertable
+    #region IConvertable
 
         TypeCode IConvertible.GetTypeCode()
         {
@@ -258,9 +259,9 @@ namespace FixedMath
             return (float)RawValue;
         }
 
-        #endregion
+    #endregion
 
-        #region Arithmetic Operators
+    #region Arithmetic Operators
 
         public static Fixed operator +(Fixed left, Fixed right)
         {
@@ -332,9 +333,9 @@ namespace FixedMath
             return new Fixed(value.RawValue);
         }
 
-        #endregion
+    #endregion
 
-        #region Relational Operators
+    #region Relational Operators
 
         public static bool operator ==(Fixed left, Fixed right)
         {
@@ -426,16 +427,16 @@ namespace FixedMath
             return left >= right.RawValue;
         }
 
-        #endregion
+    #endregion
 
-        #region Approximate Comparison
+    #region Approximate Comparison
 
         public static bool Approximately(Fixed left, Fixed right)
         {
             return (FMath.Abs(left - right)) < FromFraction(1, 100000) * FMath.Max(FMath.Abs(left), FMath.Abs(right));
         }
 
-        #endregion
+    #endregion
     }
 
 #endif

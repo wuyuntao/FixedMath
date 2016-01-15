@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 namespace FixedMath
 {
+	[Serializable, StructLayout(LayoutKind.Sequential)]
 	public struct FVector2 : IEquatable<FVector2>, IFormattable
 	{
 		public static readonly FVector2 Zero = new FVector2(Fixed.FromInt(0), Fixed.FromInt(0));

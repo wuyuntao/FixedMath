@@ -24,7 +24,6 @@ namespace FixedMath.Tests
         [Test]
         public void TestParseInt()
         {
-            // Test Int
             var n = Fixed.Parse("0");
             Assert.AreEqual(Fixed.Zero, n);
 
@@ -44,7 +43,6 @@ namespace FixedMath.Tests
         [Test]
         public void TestParseFloat()
         {
-            // Test Int
             var f = Fixed.Parse("000.0000");
             AssertApproximately(Fixed.Zero, f);
 
