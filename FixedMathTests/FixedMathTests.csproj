@@ -43,6 +43,7 @@
     <Compile Include="AtanAlgoComparison.cs" />
     <Compile Include="FixedTest.cs" />
     <Compile Include="FractionTest.cs" />
+    <Compile Include="FRandomTest.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SinAlgoComparison.cs" />

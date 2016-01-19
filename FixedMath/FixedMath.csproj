@@ -36,6 +36,7 @@
     <Compile Include="Fixed.cs" />
     <Compile Include="FMath.cs" />
     <Compile Include="Fraction.cs" />
+    <Compile Include="FRandom.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FVector2.cs" />
   </ItemGroup>

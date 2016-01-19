@@ -7,7 +7,8 @@ namespace FixedMath.Tests
         static void Main(string[] args)
         {
             //RunFixedTest();
-            RunFractionTest();
+            //RunFractionTest();
+            RunFRandomTest();
             //SqrtAlgoComparison.Compare();
             //SinAlgoComparison.Compare();
             //AtanAlgoComparison.Compare();
@@ -18,28 +19,35 @@ namespace FixedMath.Tests
 
         static void RunFixedTest()
         {
-            var tests = new FixedTest();
-            tests.TestFactory();
-            tests.TestParseInt();
-            tests.TestParseFloat();
-            tests.TestAdd();
-            tests.TestSubtract();
-            tests.TestMultiply();
-            tests.TestDivide();
-            tests.TestSqrt();
-            tests.TestSin();
-            tests.TestCos();
-            tests.TestTan();
-            tests.TestAtan();
-            tests.TestAtan2();
-            tests.TestAsin();
-            tests.TestAcos();
+            var t = new FixedTest();
+            t.TestFactory();
+            t.TestParseInt();
+            t.TestParseFloat();
+            t.TestAdd();
+            t.TestSubtract();
+            t.TestMultiply();
+            t.TestDivide();
+            t.TestSqrt();
+            t.TestSin();
+            t.TestCos();
+            t.TestTan();
+            t.TestAtan();
+            t.TestAtan2();
+            t.TestAsin();
+            t.TestAcos();
         }
 
         static void RunFractionTest()
         {
-            var tests = new FractionTest();
-            tests.TestAdd();
+            var t = new FractionTest();
+            t.TestAdd();
+        }
+
+        static void RunFRandomTest()
+        {
+            var t = new FRandomTest();
+            t.TestNext();
+            t.TestNextFixed();
         }
     }
 }
