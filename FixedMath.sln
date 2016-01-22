@@ -10,6 +10,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixedMathTests", "FixedMath
 		{482A6E77-4126-4917-BF3B-553B5CFA132C} = {482A6E77-4126-4917-BF3B-553B5CFA132C}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixedMathBenchmarks", "FixedMathBenchmarks\FixedMathBenchmarks.csproj", "{C8FE43FA-67F3-453D-8FF5-C4E922206C9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixedMathBenchmarkRunner", "FixedMathBenchmarkRunner\FixedMathBenchmarkRunner.csproj", "{74758F91-CFE6-47BE-91AB-02467701E2EC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +28,14 @@ Global
 		{1229DF9A-FD4F-4427-A14E-83C15AB66AD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1229DF9A-FD4F-4427-A14E-83C15AB66AD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1229DF9A-FD4F-4427-A14E-83C15AB66AD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8FE43FA-67F3-453D-8FF5-C4E922206C9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8FE43FA-67F3-453D-8FF5-C4E922206C9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8FE43FA-67F3-453D-8FF5-C4E922206C9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8FE43FA-67F3-453D-8FF5-C4E922206C9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74758F91-CFE6-47BE-91AB-02467701E2EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74758F91-CFE6-47BE-91AB-02467701E2EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74758F91-CFE6-47BE-91AB-02467701E2EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74758F91-CFE6-47BE-91AB-02467701E2EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

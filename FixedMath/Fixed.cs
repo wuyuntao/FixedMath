@@ -37,7 +37,7 @@ namespace FixedMath
 
         public static Fixed FromFraction(int numerator, int denominator)
         {
-            return FromInt(numerator) / FromInt(denominator);
+            return FromInt(numerator) / denominator;
         }
 
         private static long GetRawValueFromInt(int value)
@@ -481,7 +481,7 @@ namespace FixedMath
 
         public static bool Approximately(Fixed left, Fixed right)
         {
-            return (FMath.Abs(left - right)) < FMath.Max(FromFraction(1, 100000) * FMath.Max(FMath.Abs(left), FMath.Abs(right)), Epsilon * FromInt(16));
+            return (FMath.Abs(left - right)) < FMath.Max(FromFraction(1, 100000) * FMath.Max(FMath.Abs(left), FMath.Abs(right)), Epsilon * 16);
         }
 
         #endregion
