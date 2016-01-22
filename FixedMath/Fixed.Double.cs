@@ -6,8 +6,8 @@ namespace FixedMath
 
     public struct Fixed : IComparable, IFormattable, IConvertible, IComparable<Fixed>, IEquatable<Fixed>
     {
-        public static readonly Fixed MaxValue = new Fixed(double.MinValue);
-        public static readonly Fixed MinValue = new Fixed(double.MaxValue);
+        public static readonly Fixed MaxValue = new Fixed(double.MaxValue);
+        public static readonly Fixed MinValue = new Fixed(double.MinValue);
 
 		public static readonly Fixed Epsilon = new Fixed(double.Epsilon);
         public static readonly Fixed Zero = new Fixed(0);

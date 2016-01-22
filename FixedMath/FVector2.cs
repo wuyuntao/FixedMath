@@ -3,189 +3,203 @@ using System.Runtime.InteropServices;
 
 namespace FixedMath
 {
-	[Serializable, StructLayout(LayoutKind.Sequential)]
-	public struct FVector2 : IEquatable<FVector2>, IFormattable
-	{
-		public static readonly FVector2 Zero = new FVector2(Fixed.FromInt(0), Fixed.FromInt(0));
-		
-		public static readonly FVector2 One = new FVector2(Fixed.FromInt(1), Fixed.FromInt(1));
+    [Serializable, StructLayout(LayoutKind.Sequential)]
+    public struct FVector2 : IEquatable<FVector2>, IFormattable
+    {
+        public static readonly FVector2 Zero = new FVector2(Fixed.Zero, Fixed.Zero);
 
-		public static readonly FVector2 Max = new FVector2(Fixed.MaxValue, Fixed.MaxValue);
-		
-		public static readonly FVector2 Min = new FVector2(Fixed.MinValue, Fixed.MinValue);
+        public static readonly FVector2 One = new FVector2(Fixed.One, Fixed.One);
 
-		public Fixed X;
-		public Fixed Y;
+        public static readonly FVector2 MaxValue = new FVector2(Fixed.MaxValue, Fixed.MaxValue);
 
-		public FVector2(Fixed value)
-		{
-			X = value;
-			Y = value;
-		}
+        public static readonly FVector2 MinValue = new FVector2(Fixed.MinValue, Fixed.MinValue);
 
-		public FVector2(Fixed x, Fixed y)
-		{
-			X = x;
-			Y = y;
-		}
+        public Fixed X;
+        public Fixed Y;
 
-		#region IEquatable
+        public FVector2(Fixed value)
+        {
+            X = value;
+            Y = value;
+        }
 
-		public override bool Equals(object obj)
-		{
-			if (!(obj is FVector2))
-				return false;
+        public FVector2(Fixed x, Fixed y)
+        {
+            X = x;
+            Y = y;
+        }
 
-			return Equals((FVector2)obj);
-		}
+        #region IEquatable
 
-		public bool Equals(FVector2 obj)
-		{
-			return obj.X == X && obj.Y == Y;
-		}
+        public override bool Equals(object obj)
+        {
+            if (!(obj is FVector2))
+                return false;
 
-		public override int GetHashCode()
-		{
-			return (X.GetHashCode() * 0x18d ^ Y.GetHashCode()).GetHashCode();
-		}
+            return Equals((FVector2)obj);
+        }
 
-		#endregion
+        public bool Equals(FVector2 obj)
+        {
+            return obj.X == X && obj.Y == Y;
+        }
 
-		#region IFormattable
+        public override int GetHashCode()
+        {
+            return (X.GetHashCode() * 0x18d ^ Y.GetHashCode()).GetHashCode();
+        }
 
-		public string ToString(string format, IFormatProvider formatProvider)
-		{
-			return string.Format("({0}, {1})", X.ToString(format, formatProvider), Y.ToString(format, formatProvider));
-		}
+        #endregion
 
-		public string ToString(string format)
-		{
-			return string.Format("({0}, {1})", X.ToString(format), Y.ToString(format));
-		}
+        #region IFormattable
 
-		public string ToString(IFormatProvider formatProvider)
-		{
-			return string.Format("({0}, {1})", X.ToString(formatProvider), Y.ToString(formatProvider));
-		}
+        public string ToString(string format, IFormatProvider formatProvider)
+        {
+            return string.Format("({0}, {1})", X.ToString(format, formatProvider), Y.ToString(format, formatProvider));
+        }
 
-		public override string ToString()
-		{
-			return string.Format("({0}, {1})", X.ToString(), Y.ToString());
-		}
+        public string ToString(string format)
+        {
+            return string.Format("({0}, {1})", X.ToString(format), Y.ToString(format));
+        }
 
-		#endregion
+        public string ToString(IFormatProvider formatProvider)
+        {
+            return string.Format("({0}, {1})", X.ToString(formatProvider), Y.ToString(formatProvider));
+        }
 
-		#region Methods
+        public override string ToString()
+        {
+            return string.Format("({0}, {1})", X.ToString(), Y.ToString());
+        }
 
-		public Fixed Length()
-		{
-			return FMath.Sqrt(X * X + Y * Y);
-		}
+        #endregion
 
-		public Fixed LengthSquared()
-		{
-			return X * X + Y * Y;
-		}
+        #region Methods
 
-		public void Normalize()
-		{
-			var length = Length();
-			if (length != new Fixed(0))
-			{
-				X /= length;
-				Y /= length;
-			}
-		}
+        public Fixed Length()
+        {
+            return FMath.Sqrt(X * X + Y * Y);
+        }
 
-		public static FVector2 Normalize(FVector2 value)
-		{
-			value.Normalize();
-			return value;
-		}
+        public Fixed LengthSquared()
+        {
+            return X * X + Y * Y;
+        }
 
-		public static Fixed Distance(FVector2 value1, FVector2 value2)
-		{
-			return (value1 - value2).Length();
-		}
+        public void Normalize()
+        {
+            var length = Length();
+            if (length != new Fixed(0))
+            {
+                X /= length;
+                Y /= length;
+            }
+        }
 
-		public static Fixed DistanceSquared(FVector2 value1, FVector2 value2)
-		{
-			return (value1 - value2).LengthSquared();
-		}
+        public static FVector2 Normalize(FVector2 value)
+        {
+            value.Normalize();
+            return value;
+        }
+
+        public static Fixed Distance(FVector2 value1, FVector2 value2)
+        {
+            return (value1 - value2).Length();
+        }
+
+        public static Fixed DistanceSquared(FVector2 value1, FVector2 value2)
+        {
+            return (value1 - value2).LengthSquared();
+        }
 
         public static Fixed Dot(FVector2 value1, FVector2 value2)
         {
             return value1.X * value2.X + value1.Y * value2.Y;
         }
+        public static Fixed Cross(FVector2 value1, FVector2 value2)
+        {
+            return value1.X * value2.Y + value1.Y * value2.X;
+        }
 
-		#endregion
+        public static FVector2 Min(FVector2 value1, FVector2 value2)
+        {
+            return new FVector2(FMath.Min(value1.X, value2.X), FMath.Min(value1.Y, value2.Y));
+        }
 
-		#region Arithmetic Operators
+        public static FVector2 Max(FVector2 value1, FVector2 value2)
+        {
+            return new FVector2(FMath.Max(value1.X, value2.X), FMath.Max(value1.Y, value2.Y));
+        }
 
-		public static FVector2 operator +(FVector2 value)
-		{
-			return new FVector2(+value.X, +value.Y);
-		}
+        #endregion
 
-		public static FVector2 operator +(FVector2 left, FVector2 right)
-		{
-			return new FVector2(left.X + right.X, left.Y + right.Y);
-		}
+        #region Arithmetic Operators
 
-		public static FVector2 operator -(FVector2 value)
-		{
-			return new FVector2(-value.X, -value.Y);
-		}
+        public static FVector2 operator +(FVector2 value)
+        {
+            return new FVector2(+value.X, +value.Y);
+        }
 
-		public static FVector2 operator -(FVector2 left, FVector2 right)
-		{
-			return new FVector2(left.X - right.X, left.Y - right.Y);
-		}
+        public static FVector2 operator +(FVector2 left, FVector2 right)
+        {
+            return new FVector2(left.X + right.X, left.Y + right.Y);
+        }
 
-		public static FVector2 operator *(FVector2 value, Fixed scale)
-		{
-			return new FVector2(value.X * scale, value.Y * scale);
-		}
+        public static FVector2 operator -(FVector2 value)
+        {
+            return new FVector2(-value.X, -value.Y);
+        }
 
-		public static FVector2 operator *(Fixed scale, FVector2 value)
-		{
-			return new FVector2(value.X * scale, value.Y * scale);
-		}
+        public static FVector2 operator -(FVector2 left, FVector2 right)
+        {
+            return new FVector2(left.X - right.X, left.Y - right.Y);
+        }
 
-		public static FVector2 operator *(FVector2 left, FVector2 right)
-		{
-			return new FVector2(left.X * right.X, left.Y * right.Y);
-		}
+        public static FVector2 operator *(FVector2 value, Fixed scale)
+        {
+            return new FVector2(value.X * scale, value.Y * scale);
+        }
 
-		public static FVector2 operator /(FVector2 value, Fixed scale)
-		{
-			return new FVector2(value.X / scale, value.Y / scale);
-		}
+        public static FVector2 operator *(Fixed scale, FVector2 value)
+        {
+            return new FVector2(value.X * scale, value.Y * scale);
+        }
 
-		public static FVector2 operator /(Fixed scale, FVector2 value)
-		{
-			return new FVector2(scale / value.X, scale / value.Y);
-		}
+        public static FVector2 operator *(FVector2 left, FVector2 right)
+        {
+            return new FVector2(left.X * right.X, left.Y * right.Y);
+        }
 
-		public static FVector2 operator /(FVector2 left, FVector2 right)
-		{
-			return new FVector2(left.X / right.X, left.Y / right.Y);
-		}
+        public static FVector2 operator /(FVector2 value, Fixed scale)
+        {
+            return new FVector2(value.X / scale, value.Y / scale);
+        }
 
-		#endregion
+        public static FVector2 operator /(Fixed scale, FVector2 value)
+        {
+            return new FVector2(scale / value.X, scale / value.Y);
+        }
 
-		#region Relational Operators
+        public static FVector2 operator /(FVector2 left, FVector2 right)
+        {
+            return new FVector2(left.X / right.X, left.Y / right.Y);
+        }
 
-		public static bool operator ==(FVector2 left, FVector2 right)
-		{
-			return left.X == right.X && left.Y == right.Y;
-		}
+        #endregion
 
-		public static bool operator !=(FVector2 left, FVector2 right)
-		{
-			return left.X != right.X || left.Y != right.Y;
-		}
+        #region Relational Operators
 
-		#endregion
-	}
+        public static bool operator ==(FVector2 left, FVector2 right)
+        {
+            return left.X == right.X && left.Y == right.Y;
+        }
+
+        public static bool operator !=(FVector2 left, FVector2 right)
+        {
+            return left.X != right.X || left.Y != right.Y;
+        }
+
+        #endregion
+    }
 }
