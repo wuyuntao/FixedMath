@@ -33,11 +33,11 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DivideBenchmark.cs" />
-    <Compile Include="MultiplyBenchmark.cs" />
-    <Compile Include="SubtractBenchmark.cs" />
+    <Compile Include="FixedDivideBenchmark.cs" />
+    <Compile Include="FixedMultiplyBenchmark.cs" />
+    <Compile Include="FixedSubtractBenchmark.cs" />
     <Compile Include="Benchmark.cs" />
-    <Compile Include="AddBenchmark.cs" />
+    <Compile Include="FixedAddBenchmark.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

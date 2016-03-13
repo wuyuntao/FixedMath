@@ -2,7 +2,7 @@
 
 namespace FixedMath.Benchmarks
 {
-    public class DivideBenchmark : Benchmark
+    public class FixedDivideBenchmark : Benchmark
     {
         public override void Run()
         {

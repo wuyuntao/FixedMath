@@ -2,7 +2,6 @@
 
 namespace FixedMath
 {
-#if FIXEDPOINT
     public struct Fixed : IComparable, IFormattable, IConvertible, IComparable<Fixed>, IEquatable<Fixed>
     {
         // https://en.wikipedia.org/wiki/Q_%28number_format%29
@@ -486,5 +485,4 @@ namespace FixedMath
 
         #endregion
     }
-#endif
 }

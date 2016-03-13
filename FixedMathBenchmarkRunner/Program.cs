@@ -5,25 +5,30 @@ namespace FixedMath.BenchmarkRunner
 {
     class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            var add = new AddBenchmark();
+            RunFixedBenchmarks();
+
+            Console.ReadKey();
+        }
+
+        private static void RunFixedBenchmarks()
+        {
+            var add = new FixedAddBenchmark();
             add.Run();
             Console.WriteLine(add.ToString());
 
-            var sub = new SubtractBenchmark();
+            var sub = new FixedSubtractBenchmark();
             sub.Run();
             Console.WriteLine(sub.ToString());
 
-            var mul = new MultiplyBenchmark();
+            var mul = new FixedMultiplyBenchmark();
             mul.Run();
             Console.WriteLine(mul.ToString());
 
-            var div = new DivideBenchmark();
+            var div = new FixedDivideBenchmark();
             div.Run();
             Console.WriteLine(div.ToString());
-
-            Console.ReadKey();
         }
     }
 }
