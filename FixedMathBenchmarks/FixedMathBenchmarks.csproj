@@ -33,11 +33,16 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FractionDivideBenchmark.cs" />
+    <Compile Include="FractionMultiplyBenchmark.cs" />
+    <Compile Include="FractionSubtractBenchmark.cs" />
+    <Compile Include="FractionAddBenchmark.cs" />
     <Compile Include="FixedDivideBenchmark.cs" />
     <Compile Include="FixedMultiplyBenchmark.cs" />
     <Compile Include="FixedSubtractBenchmark.cs" />
     <Compile Include="Benchmark.cs" />
     <Compile Include="FixedAddBenchmark.cs" />
+    <Compile Include="FractionHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

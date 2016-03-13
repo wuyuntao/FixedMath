@@ -21,9 +21,9 @@ namespace FixedMath
         public static readonly Fraction Zero = new Fraction(0, 1);
         public static readonly Fraction One = new Fraction(1, 1);
 
-        public int Numerator;
+        public long Numerator;
 
-        public int Denominator;
+        public long Denominator;
 
         public Fraction(int integer)
         {
@@ -35,6 +35,18 @@ namespace FixedMath
         }
 
         public Fraction(int numerator, int denominator)
+        {
+            if (numerator == int.MinValue)
+                numerator++;    // prevent serious issues later..
+
+            if (denominator == int.MinValue)
+                denominator++;	// prevent serious issues later..
+
+            Numerator = numerator;
+            Denominator = denominator;
+        }
+
+        Fraction(long numerator, long denominator)
         {
             if (numerator == int.MinValue)
                 numerator++;    // prevent serious issues later..
@@ -283,7 +295,7 @@ namespace FixedMath
             frac1.Denominator = frac1.Denominator / gcdBottom;
         }
 
-        private static int GCD(int left, int right)
+        private static long GCD(long left, long right)
         {
             // take absolute values
             if (left < 0)
@@ -300,7 +312,7 @@ namespace FixedMath
             {
                 if (left < right)
                 {
-                    int temp = left;  // swap the two operands
+                    var temp = left;  // swap the two operands
                     left = right;
                     right = temp;
                 }
@@ -331,7 +343,7 @@ namespace FixedMath
             if (Denominator == 0)
                 throw new ArgumentException();
 
-            return Numerator / Denominator;
+            return (int)(Numerator / Denominator);
         }
 
         public float ToFloat()
