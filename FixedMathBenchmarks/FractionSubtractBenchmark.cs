@@ -24,13 +24,13 @@ namespace FixedMath.Benchmarks
 
             LoopBase(() => result = a - b);
 
-            var fa = FractionHelper.FromFloat(a);
-            var fb = FractionHelper.FromFloat(b);
+            var fa = FloatHelper.ToFraction(a);
+            var fb = b.ToFraction();
             var fresult = fa - fb;
 
             LoopFixed(() => fresult = fa - fb);
 
-            if (!FractionHelper.Approximately(fresult, FractionHelper.FromFloat(result)))
+            if (!FloatHelper.Approximately(fresult.ToFloat(), result))
                 throw new InvalidOperationException();
         }
 
@@ -42,13 +42,13 @@ namespace FixedMath.Benchmarks
 
             LoopBase(() => result = a - b);
 
-            var fa = FractionHelper.FromFloat(a);
+            var fa = FloatHelper.ToFraction(a);
             var fb = new Fraction(b);
             var fresult = fa - fb;
 
             LoopFixed(() => fresult = fa - fb);
 
-            if (!FractionHelper.Approximately(fresult, FractionHelper.FromFloat(result)))
+            if (!FloatHelper.Approximately(fresult.ToFloat(), result))
                 throw new InvalidOperationException();
         }
 
@@ -61,12 +61,12 @@ namespace FixedMath.Benchmarks
             LoopBase(() => result = a - b);
 
             var fa = new Fraction(a);
-            var fb = FractionHelper.FromFloat(b);
+            var fb = b.ToFraction();
             var fresult = fa - fb;
 
             LoopFixed(() => fresult = fa - fb);
 
-            if (!FractionHelper.Approximately(fresult, FractionHelper.FromFloat(result)))
+            if (!FloatHelper.Approximately(fresult.ToFloat(), result))
                 throw new InvalidOperationException();
         }
 

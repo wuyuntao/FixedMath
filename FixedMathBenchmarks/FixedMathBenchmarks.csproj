@@ -34,6 +34,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FractionDivideBenchmark.cs" />
+    <Compile Include="FractionCompareBenchmark.cs" />
     <Compile Include="FractionMultiplyBenchmark.cs" />
     <Compile Include="FractionSubtractBenchmark.cs" />
     <Compile Include="FractionAddBenchmark.cs" />
@@ -42,7 +43,7 @@
     <Compile Include="FixedSubtractBenchmark.cs" />
     <Compile Include="Benchmark.cs" />
     <Compile Include="FixedAddBenchmark.cs" />
-    <Compile Include="FractionHelper.cs" />
+    <Compile Include="FloatHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

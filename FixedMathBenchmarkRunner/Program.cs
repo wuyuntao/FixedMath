@@ -49,6 +49,10 @@ namespace FixedMath.BenchmarkRunner
             var div = new FractionDivideBenchmark();
             div.Run();
             Console.WriteLine(div.ToString());
+
+            var compare = new FractionCompareBenchmark();
+            compare.Run();
+            Console.WriteLine(compare.ToString());
         }
     }
 }

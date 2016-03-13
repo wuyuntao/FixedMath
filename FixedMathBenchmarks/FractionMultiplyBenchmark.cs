@@ -2,91 +2,32 @@
 
 namespace FixedMath.Benchmarks
 {
-    public class FractionMultiplyBenchmark : Benchmark
+    public class FractionCompareBenchmark : Benchmark
     {
         public override void Run()
         {
             var r = new Random();
 
-            Run_Multiply_Float_Float(r);
-            Run_Multiply_Float_Int(r);
-            Run_Multiply_Int_Float(r);
-            Run_Multiply_Int_Int(r);
+            Run_Compare_Float_Float(r);
         }
 
-        #region Multiply
+        #region Compare
 
-        private void Run_Multiply_Float_Float(Random r)
+        private void Run_Compare_Float_Float(Random r)
         {
             var a = (float)(r.NextDouble() * r.Next(-1000, 1000));
             a = float.Parse(a.ToString("f5"));
             var b = (float)(r.NextDouble() * r.Next(-1000, 1000));
             b = float.Parse(b.ToString("f5"));
-            var result = a * b;
+            var result = a.CompareTo(b);
 
-            LoopBase(() => result = a * b);
+            LoopBase(() => result = a.CompareTo(b));
 
-            var fa = FractionHelper.FromFloat(a);
-            var fb = FractionHelper.FromFloat(b);
-            var fresult = fa * fb;
+            var fa = FloatHelper.ToFraction(a);
+            var fb = b.ToFraction();
+            var fresult = fa.CompareTo(fb);
 
-            LoopFixed(() => fresult = fa * fb);
-
-            if (!FractionHelper.Approximately(fresult, FractionHelper.FromFloat(result)))
-                throw new InvalidOperationException();
-        }
-
-        private void Run_Multiply_Float_Int(Random r)
-        {
-            var a = (float)(r.NextDouble() * r.Next(-1000, 1000));
-            a = float.Parse(a.ToString("f5"));
-            var b = r.Next(-1000, 1000);
-            var result = a * b;
-
-            LoopBase(() => result = a * b);
-
-            var fa = FractionHelper.FromFloat(a);
-            var fb = new Fraction(b);
-            var fresult = fa * fb;
-
-            LoopFixed(() => fresult = fa * fb);
-
-            if (!FractionHelper.Approximately(fresult, FractionHelper.FromFloat(result)))
-                throw new InvalidOperationException();
-        }
-
-        private void Run_Multiply_Int_Float(Random r)
-        {
-            var a = r.Next(-1000, 1000);
-            var b = (float)(r.NextDouble() * r.Next(-1000, 1000));
-            b = float.Parse(b.ToString("f5"));
-            var result = a * b;
-
-            LoopBase(() => result = a * b);
-
-            var fa = new Fraction(a);
-            var fb = FractionHelper.FromFloat(b);
-            var fresult = fa * fb;
-
-            LoopFixed(() => fresult = fa * fb);
-
-            if (!FractionHelper.Approximately(fresult, FractionHelper.FromFloat(result)))
-                throw new InvalidOperationException();
-        }
-
-        private void Run_Multiply_Int_Int(Random r)
-        {
-            var a = r.Next(-1000, 1000);
-            var b = r.Next(-1000, 1000);
-            var result = a * b;
-
-            LoopBase(() => result = a * b);
-
-            var fa = new Fraction(a);
-            var fb = new Fraction(b);
-            var fresult = fa * fb;
-
-            LoopFixed(() => fresult = fa * fb);
+            LoopFixed(() => fresult = fa.CompareTo(fb));
 
             if (result != fresult)
                 throw new InvalidOperationException();
