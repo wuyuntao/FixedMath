@@ -15,9 +15,9 @@ namespace FixedMath.Benchmarks
 
         private void Run_Compare_Float_Float(Random r)
         {
-            var a = (float)(r.NextDouble() * r.Next(-1000, 1000));
+            var a = (float)(r.NextDouble() * r.Next(-10000, 1000000));
             a = float.Parse(a.ToString("f5"));
-            var b = (float)(r.NextDouble() * r.Next(-1000, 1000));
+            var b = (float)(r.NextDouble() * r.Next(-10000, 1000000));
             b = float.Parse(b.ToString("f5"));
             var result = a.CompareTo(b);
 

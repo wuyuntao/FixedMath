@@ -156,15 +156,13 @@ namespace FixedMath
                 return -IndeterminantCompare(Math.Sign(value.Numerator), this);
             }
 
-            // they're both normal Fractions
-            CrossReducePair(ref this, ref value);
+            var gcd = GCD(Denominator, value.Denominator); // cannot return less than 1
+            var leftDenominator = Denominator / gcd;
+            var rightDenominator = value.Denominator / gcd;
 
             checked
             {
-                var leftScale = Numerator * value.Denominator;
-                var rightScale = Denominator * value.Numerator;
-
-                return leftScale.CompareTo(rightScale);
+                return (Numerator * rightDenominator).CompareTo(value.Numerator * leftDenominator);
             }
         }
 
